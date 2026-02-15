@@ -1,4 +1,3 @@
-```markdown
 # 🚀 VPS API - Deployment Guide
 
 ## 📦 Initial Server Setup
