@@ -177,6 +177,30 @@ Visit `http://api.yourdomain.com` - you should see your API response.
 
 ## 🔒 SSL Certificate with Certbot
 
+### ⚠️ Important: Strip SSL Lines Before Running Certbot
+
+If your Nginx config already contains SSL/HTTPS references (e.g. copied from a template), Certbot will fail because the certificate doesn't exist yet. You must temporarily remove those lines first.
+
+**Step 1 — Edit your Nginx config and remove any SSL lines:**
+```bash
+sudo nano /etc/nginx/sites-available/api.yourdomain.com
+```
+
+Remove or comment out any lines referencing:
+- `listen 443 ssl`
+- `ssl_certificate`
+- `ssl_certificate_key`
+- `include /etc/letsencrypt/options-ssl-nginx.conf`
+- `ssl_dhparam`
+
+Your config should look like the basic HTTP config in the section above before proceeding.
+
+**Step 2 — Test and reload Nginx:**
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
 ### Install Certbot
 ```bash
 sudo apt install certbot python3-certbot-nginx -y
@@ -191,6 +215,8 @@ Follow the interactive prompts:
 - Enter email for renewal notifications
 - Agree to terms of service
 - Choose whether to redirect HTTP to HTTPS
+
+> Certbot will automatically add the SSL configuration back to your Nginx config and create the `/etc/letsencrypt/options-ssl-nginx.conf` file.
 
 ### Test Auto-Renewal
 ```bash
@@ -238,4 +264,3 @@ sudo service redis-server restart
 
 ---
 API should now be live at `https://api.yourdomain.com`! 🎉
-```
