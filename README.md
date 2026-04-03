@@ -2,7 +2,7 @@
 
 ## 📦 Initial Server Setup
 
-### Connect to EC2 Instance
+### Connect to EC2 Instance (example)
 ```bash
 cd $HOME/.ssh
 ssh -i my-video-captioning-dev-key.pem ubuntu@13.48.28.126
@@ -237,21 +237,5 @@ sudo service redis-server restart
 ```
 
 ---
-
-## 📝 Environment Variables (.env)
-
-Make sure to set these environment variables on your server:
-```env
-NODE_ENV=production
-PORT=3000
-MONGODB_PROD_URI=your_mongodb_connection_string
-SESSION_SECRET=your_secure_session_secret
-REDIS_HOST=localhost
-REDIS_PORT=6379
-FRONTEND_URL=https://your-frontend-domain.com
-```
-
----
-
-Your API should now be live at `https://api.yourdomain.com`! 🎉
+API should now be live at `https://api.yourdomain.com`! 🎉
 ```
